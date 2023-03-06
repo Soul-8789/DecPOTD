@@ -12,7 +12,7 @@ public:
     int matrixMultiplication(int N, int arr[])
     {
         // code here
-        int dp[N][N];
+        vector<vector<int> > dp(N,vector<int> (N,0));
       
         for(int i=1;i<N;i++)
         {
