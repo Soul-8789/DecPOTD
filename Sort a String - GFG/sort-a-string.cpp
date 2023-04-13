@@ -22,19 +22,21 @@ return 0;
 
 string sort(string s){
     //complete the function here
-    map<char,int> mp;
-    for(auto x:s)
-    {
-        mp[x]++;
-    }
-    string res="";
-    for(auto x:mp)
-    {
-        int t=x.second;
-        for(int i=0;i<t;i++)
-        {
-            res+=x.first;
-        }
-    }
-    return res;
+    // map<char,int> mp;
+    // for(auto x:s)
+    // {
+    //     mp[x]++;
+    // }
+    // string res="";
+    // for(auto x:mp)
+    // {
+    //     int t=x.second;
+    //     for(int i=0;i<t;i++)
+    //     {
+    //         res+=x.first;
+    //     }
+    // }
+    // return res;
+    sort(s.begin(),s.end());
+    return s;
 }
