@@ -7,7 +7,9 @@ using namespace std;
 class Solution
 {
     public:
+   
     int t[1001][1001];
+        int dp[1001][1001];
     //Function to return max value that can be put in knapsack of capacity W.
     int helper(int n,int W,int wt[],int val[]){
         if(n==0 || W==0) return 0;
@@ -22,8 +24,20 @@ class Solution
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
-       memset(t,-1,sizeof(t));
-       return helper(n,W,wt,val);
+    //   memset(t,-1,sizeof(t));
+    memset(dp,0,sizeof(dp));
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=W;j++){
+                if(wt[i-1]<=j){
+                dp[i][j]=max(dp[i-1][j-wt[i-1]]+val[i-1],dp[i-1][j]);
+             }
+           else{
+            dp[i][j]= dp[i-1][j];
+             }
+            }
+        }
+       return dp[n][W];
     }
 };
 
