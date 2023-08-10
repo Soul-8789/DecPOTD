@@ -25,19 +25,33 @@ class Solution
     { 
        // Your code here
     //   memset(t,-1,sizeof(t));
+    // memset(dp,0,sizeof(dp));
+    //     for(int i=1;i<=n;i++)
+    //     {
+    //         for(int j=1;j<=W;j++){
+    //             if(wt[i-1]<=j){
+    //             dp[i][j]=max(dp[i-1][j-wt[i-1]]+val[i-1],dp[i-1][j]);
+    //          }
+    //       else{
+    //         dp[i][j]= dp[i-1][j];
+    //          }
+    //         }
+    //     }
+    //   return dp[n][W];
+    int dp[W+1];
     memset(dp,0,sizeof(dp));
-        for(int i=1;i<=n;i++)
+    
+    for(int i=0;i<n;i++)
+    {
+        for(int j=W;j>=wt[i];j--)
         {
-            for(int j=1;j<=W;j++){
-                if(wt[i-1]<=j){
-                dp[i][j]=max(dp[i-1][j-wt[i-1]]+val[i-1],dp[i-1][j]);
-             }
-           else{
-            dp[i][j]= dp[i-1][j];
-             }
-            }
+            dp[j]=max(dp[j-wt[i]]+val[i],dp[j]);
         }
-       return dp[n][W];
+    }
+    
+    
+    return dp[W];
+    
     }
 };
 
