@@ -10,24 +10,20 @@ class Solution{
 public:	
 	/* if x is present in arr[] then returns the count
 		of occurrences of x, otherwise returns 0. */
-	int count(int arr[], int n, int target) {
+	int count(int arr[], int n, int x) {
 	    // code here
-	    vector<int>ans;
-        // int n=nums.size();
-        auto index=lower_bound(arr,arr+n,target);
-        auto last=upper_bound(arr,arr+n,target);
-       
-        //  if(index!=n && nums[index]==target)
-        // {
-        //     ans.push_back(index);
-        //     ans.push_back(last-1);
-        // }
-        // else
-        // {
-        //     ans.push_back(-1);
-        //     ans.push_back(-1);
-        // }
-        return last-index;
+	    map<int,int> mp;
+	    for(int i=0;i<n;i++)
+	    {
+	        mp[arr[i]]++;
+	    }
+	    for(auto it:mp){
+	        if(it.first==x)
+	        {
+	            return it.second;
+	        }
+	    }
+	    return 0;
 	}
 };
 
