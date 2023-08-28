@@ -7,51 +7,27 @@ using namespace std;
 class Solution
 {
     public:
-   
-    int t[1001][1001];
-        int dp[1001][1001];
+    int t[1002][1002];
     //Function to return max value that can be put in knapsack of capacity W.
-    int helper(int n,int W,int wt[],int val[]){
+    int helper(int n,int wt[],int val[],int W)
+    {
         if(n==0 || W==0) return 0;
-        if(t[n][W]!=-1) return t[n][W];
-        if(wt[n-1]<=W){
-            return t[n][W]=max(helper(n-1,W-wt[n-1],wt,val)+val[n-1],helper(n-1,W,wt,val));
+        
+        if(t[n][W]!= -1) return t[n][W];
+        
+        if(wt[n-1]<=W)
+        {
+            return t[n][W]= max(val[n-1]+helper(n-1,wt,val,W-wt[n-1]),helper(n-1,wt,val,W));
         }
         else{
-            return t[n][W]= helper(n-1,W,wt,val);
+            return t[n][W]=helper(n-1,wt,val,W);
         }
     }
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
-    //   memset(t,-1,sizeof(t));
-    // memset(dp,0,sizeof(dp));
-    //     for(int i=1;i<=n;i++)
-    //     {
-    //         for(int j=1;j<=W;j++){
-    //             if(wt[i-1]<=j){
-    //             dp[i][j]=max(dp[i-1][j-wt[i-1]]+val[i-1],dp[i-1][j]);
-    //          }
-    //       else{
-    //         dp[i][j]= dp[i-1][j];
-    //          }
-    //         }
-    //     }
-    //   return dp[n][W];
-    int dp[W+1];
-    memset(dp,0,sizeof(dp));
-    
-    for(int i=0;i<n;i++)
-    {
-        for(int j=W;j>=wt[i];j--)
-        {
-            dp[j]=max(dp[j-wt[i]]+val[i],dp[j]);
-        }
-    }
-    
-    
-    return dp[W];
-    
+       memset(t,-1,sizeof(t));
+       return helper(n,wt,val,W);
     }
 };
 
