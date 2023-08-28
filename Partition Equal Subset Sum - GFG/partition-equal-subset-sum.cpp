@@ -9,31 +9,30 @@ using namespace std;
 
 class Solution{
 public:
-   bool isSubsetSum(int wt[], int W,int n){
-        // code here
-        
-    vector<vector<int>> dp(n+1,vector<int>(W+1,0));
-     for(int i=0;i<n+1;i++)
-     {
-         for(int j=0;j<W+1;j++)
-         {
-             if(i==0 ) 
-             dp[i][0]=1;
-         }
-     }
-      for(int i=1;i<n+1;i++)
-     {
-         for(int j=1;j<W+1;j++)
-         {
-             if(wt[i-1]<=j) 
-             dp[i][j]=dp[i-1][j-wt[i-1]]||dp[i-1][j];
-             else
-             dp[i][j]=dp[i-1][j];
-         }
-     }
-       
-    return dp[n][W];
-    }
+   int subsetsum(int N,int arr[],int sum)
+   {
+       int t[N+1][sum+1];
+       memset(t,0,sizeof(t));
+       for(int i=0;i<=N;i++)
+       {
+           t[i][0]=1;
+       }
+       for(int i=1;i<=N;i++)
+       {
+           for(int j=1;j<=sum;j++)
+           {
+               if(arr[i-1]<=j){
+                   t[i][j]=t[i-1][j] || t[i-1][j-arr[i-1]];
+               }
+               
+               else{
+                   t[i][j]=t[i-1][j] ;
+               }
+           }
+       }
+       return t[N][sum];
+   }
+
     int equalPartition(int N, int arr[])
     {
         // code here
@@ -43,10 +42,7 @@ public:
             sum+=arr[i];
         }
         if(sum&1) return 0;
-        
-        else{
-            return isSubsetSum(arr,sum/2,N);
-        }
+        else return subsetsum(N,arr,sum/2);
     }
 };
 
