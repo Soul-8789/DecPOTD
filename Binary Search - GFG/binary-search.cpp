@@ -10,29 +10,34 @@ using namespace std;
 
 class Solution {
   public:
-  int binfun(int v[],int low,int high,int x)
+   bool isvalid(int mid,int arr[],int k)
   {
-      if(low>high){
-          return -1;
-      }
-      int mid=low+(high-low)/2;
-      if(v[mid]==x) return mid;
-      else if(x<v[mid]) return binfun(v,low,mid-1,x);
-      return binfun(v,mid+1,high,x);
+      return arr[mid]<k?true:false;
   }
-    int binarysearch(int v[], int n, int x) {
+
+
+  // FFFFTTTTT
+
+    int binarysearch(int arr[], int n, int k) {
         // code here
-        int low=0;
-    int high=n-1;
-    // while(low<=high)
-    // {
-    //     int mid=low+(high-low)/2;
-    //     if(v[mid]==x) return mid;
-    //     else if(x<v[mid]) high=mid-1;
-    //     else low = mid+1;
-    // }
-    // return -1;
-    return binfun(v,low,high,x);
+        int l=0,r=n-1;
+        while(r-l>1)
+        {
+            int mid=l+(r-l)/2;
+            if(isvalid(mid,arr,k)){
+                l=mid;
+            }
+            else{
+                r=mid;
+            }
+        }
+        if(arr[r]==k){
+            return r;
+        }
+        if(arr[l]==k){
+            return l;
+        }
+        else return -1;
     }
 };
 
