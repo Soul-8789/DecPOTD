@@ -12,11 +12,11 @@ class Solution {
   public:
    bool isvalid(int mid,int arr[],int k)
   {
-      return arr[mid]<k?true:false;
+      return arr[mid]<=k?true:false;
   }
 
 
-  // FFFFTTTTT
+  // TTTTFFFF
 
     int binarysearch(int arr[], int n, int k) {
         // code here
@@ -34,9 +34,9 @@ class Solution {
         if(arr[r]==k){
             return r;
         }
-        // if(arr[l]==k){
-        //     return l;
-        // }
+        if(arr[l]==k){
+            return l;
+        }
         else return -1;
     }
 };
