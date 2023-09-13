@@ -34,9 +34,9 @@ class Solution {
         if(arr[r]==k){
             return r;
         }
-        if(arr[l]==k){
-            return l;
-        }
+        // if(arr[l]==k){
+        //     return l;
+        // }
         else return -1;
     }
 };
