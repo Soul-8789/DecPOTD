@@ -9,30 +9,38 @@ using namespace std;
 
 class Solution{
 public:
-   int subsetsum(int N,int arr[],int sum)
-   {
-       int t[N+1][sum+1];
-       memset(t,0,sizeof(t));
-       for(int i=0;i<=N;i++)
-       {
-           t[i][0]=1;
-       }
-       for(int i=1;i<=N;i++)
-       {
-           for(int j=1;j<=sum;j++)
-           {
-               if(arr[i-1]<=j){
-                   t[i][j]=t[i-1][j] || t[i-1][j-arr[i-1]];
-               }
-               
-               else{
-                   t[i][j]=t[i-1][j] ;
-               }
-           }
-       }
-       return t[N][sum];
-   }
-
+   bool isSubsetSum(int arr[],int n, int sum){
+        // code here 
+        // int n=arr.size();
+        bool dp[n+1][sum+1];
+          for(int i=0;i<n+1;i++)
+        {
+            for(int j=0;j<sum+1;j++)
+            {
+                  if(i==0)
+                dp[i][j]=false;
+                if(j==0)
+                dp[i][j]=true;
+            }
+        }
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<sum+1;j++)
+            {
+            
+      
+                
+                if(arr[i-1]<=j)
+                {
+                    dp[i][j]=dp[i-1][j-arr[i-1]] || dp[i-1][j];
+                }
+                else{
+                    dp[i][j]=dp[i-1][j];
+                }
+            }
+        }
+        return dp[n][sum];
+    }
     int equalPartition(int N, int arr[])
     {
         // code here
@@ -41,8 +49,12 @@ public:
         {
             sum+=arr[i];
         }
-        if(sum&1) return 0;
-        else return subsetsum(N,arr,sum/2);
+        if(sum&1)
+        return 0;
+        else
+        {
+            return  isSubsetSum(arr,N,sum/2);
+        }
     }
 };
 
